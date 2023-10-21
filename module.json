@@ -1,0 +1,23 @@
+{"id": "nfe_oscillating_wave_module",
+"title": "Oscillating Wave Module",
+"description": "Psychic's subconscious mind Oscillating Wave helper module",
+"authors":[
+    {"name": "Adamon"}
+],
+"version": "0.0.1",
+"compatibility": {
+    "minimum": 11,
+    "verified": 11,
+    "maximum": 11
+},
+"esmodules": [],
+"styles": [
+    "styles/styles.css"
+],
+"languages": [],
+"packs": [],
+"system": ["pf2e"],
+"url": "",
+"manifest": "",
+"download": ""
+}
