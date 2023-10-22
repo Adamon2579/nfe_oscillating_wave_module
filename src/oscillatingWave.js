@@ -2,15 +2,18 @@ export class OscillatingWave {
  
   start(verbose = true) {
     Hooks.on("ready", () => {
-      if (verbose) console.log("Starting module : OscillatingWave");
+      if (verbose) {
+        let json = require('/Users/Documents/workspace/test.json');
+        let module = JSON.parse(json);
+        console.log(`Starting module : OscillatingWave v${module.version}`);
+      }
 
-      Hooks.on("preCreateChatMessage", (message, messageShort, options, messageId) => {
+      Hooks.on("renderChatMessage", (message, html, actor) => {
         if (verbose) {
-          console.log(`Pre creating message`);
+          console.log(`rendering message`);
           console.log(message);
-          console.log(messageShort);
-          console.log(options);
-          console.log(messageId);
+          console.log(html);
+          console.log(actor);
         }
 
         //Filter messages sent by you
@@ -19,7 +22,7 @@ export class OscillatingWave {
           //Filter Spell / effects affected by conservation of energy
           //Spells
           if (message.content == "test") {
-            let message = game.messages.get(messageId);
+            let message = game.messages.get(message.id);
             message.update({"content": "test message automaticaly updated by module"})
           }
 
