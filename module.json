@@ -5,7 +5,7 @@
     "authors":[
         {"name": "Adamon"}
     ],
-    "version": "0.0.2",
+    "version": "0.0.3",
     "compatibility": {
         "minimum": 11,
         "verified": 11
@@ -23,6 +23,6 @@
     "url": "https://github.com/Adamon2579/nfe_oscillating_wave_module",
     "bugs": "https://github.com/Adamon2579/nfe_oscillating_wave_module/issues",
     "manifest": "https://github.com/Adamon2579/nfe_oscillating_wave_module/releases/latest/download/module.json",
-    "download": "https://github.com/Adamon2579/nfe_oscillating_wave_module/releases/latest/download/turn-indicator.zip",
+    "download": "https://github.com/Adamon2579/nfe_oscillating_wave_module/releases/latest/download/nfe_oscillating_wave_module.zip",
     "readme": "https://github.com/Adamon2579/nfe_oscillating_wave_module/README.md"
 }
