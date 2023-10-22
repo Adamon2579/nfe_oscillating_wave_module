@@ -3,9 +3,10 @@ export class OscillatingWave {
   start(verbose = true) {
     Hooks.on("ready", () => {
       if (verbose) {
-        fetch('./module.json')
+        fetch('./modules/nfe_oscillating_wave_module/module.json')
           .then(response => response.json())
-          .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`));
+          .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`))
+          .catch(e => console.log(`Starting module : OscillatingWave (error retrieving version number)`));
       }
 
       Hooks.on("createChatMessage", (message, options, messageId) => {
@@ -22,8 +23,8 @@ export class OscillatingWave {
           //Filter Spell / effects affected by conservation of energy
           //Spells
           if (message.content == "test") {
-            let message = game.messages.get(message.id);
-            message.update({"content": "test message automaticaly updated by module"})
+            let actualMessage = game.messages.get(message.id);
+            actualMessage.update({"content": "test message automaticaly updated by module"})
           }
 
 
