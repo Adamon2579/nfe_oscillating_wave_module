@@ -19,7 +19,8 @@ export class OscillatingWave {
           //Filter Spell / effects affected by conservation of energy
           //Spells
           if (message.content == "test") {
-            options.render = false
+            let message = game.messages.get(messageId);
+            message.update({"content": "test message automaticaly updated by module"})
           }
 
 
