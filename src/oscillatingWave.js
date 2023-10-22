@@ -3,17 +3,17 @@ export class OscillatingWave {
   start(verbose = true) {
     Hooks.on("ready", () => {
       if (verbose) {
-        fetch('../module.json')
+        fetch('./module.json')
           .then(response => response.json())
           .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`));
       }
 
-      Hooks.on("renderChatMessage", (message, html, actor) => {
+      Hooks.on("createChatMessage", (message, options, messageId) => {
         if (verbose) {
-          console.log(`rendering message`);
+          console.log(`creating message`);
           console.log(message);
-          console.log(html);
-          console.log(actor);
+          console.log(options);
+          console.log(messageId);
         }
 
         //Filter messages sent by you
