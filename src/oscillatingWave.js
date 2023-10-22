@@ -3,9 +3,9 @@ export class OscillatingWave {
   start(verbose = true) {
     Hooks.on("ready", () => {
       if (verbose) {
-        let json = require('/Users/Documents/workspace/test.json');
-        let module = JSON.parse(json);
-        console.log(`Starting module : OscillatingWave v${module.version}`);
+        fetch('../module.json')
+          .then(response => response.json())
+          .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`));
       }
 
       Hooks.on("renderChatMessage", (message, html, actor) => {
