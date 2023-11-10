@@ -1,6 +1,6 @@
 export class OscillatingWave {
  
-  start(verbose = true) {
+  start(verbose = false) {
     Hooks.on("ready", () => {
       if (verbose) {
         fetch('./modules/nfe_oscillating_wave_module/module.json')
