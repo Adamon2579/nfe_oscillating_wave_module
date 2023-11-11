@@ -7,7 +7,7 @@
             "name": "Adamon"
         }
     ],
-    "version": "0.0.9",
+    "version": "0.0.10",
     "compatibility": {
         "minimum": 11,
         "verified": 11
@@ -22,7 +22,8 @@
     },
     "esmodules": [
         "./src/main.js",
-        "./src/oscillatingWave.js"
+        "./src/oscillatingWave.js",
+        "./src/updateActor.js"
     ],
     "styles": [
         "styles/styles.css"
