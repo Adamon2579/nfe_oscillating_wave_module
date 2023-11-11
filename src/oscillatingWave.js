@@ -2,7 +2,7 @@ import { updateActor } from "./updateActor";
 
 export class OscillatingWave {
 
-    start(verbose = true) {
+    async start(verbose = true) {
         Hooks.on("ready", () => {
             if (verbose) {
                 fetch('./modules/nfe_oscillating_wave_module/module.json')

@@ -1,4 +1,4 @@
-import { OscillatingWave } from "./OscillatingWave.js";
+import { OscillatingWave } from "./oscillatingWave.js";
 
 const oscillatingWave = new OscillatingWave();
 
