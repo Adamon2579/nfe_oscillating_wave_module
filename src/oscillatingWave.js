@@ -1,4 +1,4 @@
-import { updateActor } from "./updateActor";
+import { updateActor } from "./updateActor.js";
 
 export class OscillatingWave {
 
