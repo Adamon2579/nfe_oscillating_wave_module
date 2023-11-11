@@ -2,13 +2,23 @@
     "id": "nfe_oscillating_wave_module",
     "title": "Oscillating Wave Module",
     "description": "Psychic's subconscious mind Oscillating Wave helper module",
-    "authors":[
-        {"name": "Adamon"}
+    "authors": [
+        {
+            "name": "Adamon"
+        }
     ],
-    "version": "0.0.8",
+    "version": "0.0.9",
     "compatibility": {
         "minimum": 11,
         "verified": 11
+    },
+    "relationships": {
+        "systems": [
+            {
+                "id": "pf2e",
+                "type": "system"
+            }
+        ]
     },
     "esmodules": [
         "./src/main.js",
@@ -19,7 +29,6 @@
     ],
     "languages": [],
     "packs": [],
-    "system": ["pf2e"],
     "url": "https://github.com/Adamon2579/nfe_oscillating_wave_module",
     "bugs": "https://github.com/Adamon2579/nfe_oscillating_wave_module/issues",
     "manifest": "https://github.com/Adamon2579/nfe_oscillating_wave_module/releases/latest/download/module.json",

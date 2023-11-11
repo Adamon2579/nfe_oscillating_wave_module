@@ -1,37 +1,78 @@
+import { updateActor } from "./updateActor";
+
 export class OscillatingWave {
- 
-  start(verbose = false) {
-    Hooks.on("ready", () => {
-      if (verbose) {
-        fetch('./modules/nfe_oscillating_wave_module/module.json')
-          .then(response => response.json())
-          .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`))
-          .catch(e => console.log(`Starting module : OscillatingWave (error retrieving version number)`));
-      }
 
-      Hooks.on("createChatMessage", (message, options, messageId) => {
-        if (verbose) {
-          console.log(`creating message`);
-          console.log(message);
-          console.log(options);
-          console.log(messageId);
-        }
+    start(verbose = true) {
+        Hooks.on("ready", () => {
+            if (verbose) {
+                fetch('./modules/nfe_oscillating_wave_module/module.json')
+                    .then(response => response.json())
+                    .then(jsonResponse => console.log(`Starting module : OscillatingWave v${jsonResponse.version}`))
+                    .catch(e => console.log(`Starting module : OscillatingWave (error retrieving version number)`));
+            }
 
-        //Filter messages sent by you
-        if (message.user === game.user){
-
-          //Filter Spell / effects affected by conservation of energy
-          //Spells
-          if (message.content == "test") {
-            let actualMessage = game.messages.get(message.id);
-            actualMessage.update({"content": "test message automaticaly updated by module"})
-          }
+            //init actor
+            game.actors.array.forEach(actor => {
+                if (actor.items.filter(item => item.name === 'The Oscillating Wave')) {
+                    console.log('nfe-oscillating-wave-module found an oscillating wave psychic');
+                    updateActor(actor, 'init');
+                }
+            });
 
 
-//1 => preCreateChatMessage
-//2 => createChatMessage
-//3 => renderChatMessage
-          
+
+            // Hooks.on(
+            //     "renderChatMessage",
+            //     async (message, html) => {
+            //         if (canvas.initialized) {
+            //             const speaker = await fromUuid(`Actor.${message.speaker.actor}`);
+            //             if (
+            //                 (message.flags?.pf2e?.context?.type === "attack-roll" ||
+            //                     message.flags?.pf2e?.context?.type === "spell-attack-roll" ||
+            //                     message.flags?.pf2e?.context?.type === "saving-throw") &&
+            //                 speaker.isOwner
+            //             ) {
+            //                 updateWeaknessType(message, speaker);
+            //                 handleEsotericWarden(message);
+            //             }
+            //         }
+
+            //         createChatCardButton(message, html);
+            //     },
+            //     { once: false }
+            // );
+            Hooks.on("createChatMessage", (message, options, messageId) => {
+
+                //Filter messages sent by you
+                if (message.user === game.user) {
+
+                    //Filter Spell / effects affected by conservation of energy
+                    //Spells
+                    if (message.content.includes("hb_conservation-of-energy")) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
+                        console.log('nfe-oscillating-wave-module intercepted a spell with the conservation of energy trait');
+                        let actualMessage = game.messages.get(message.id);
+                        //actualMessage.update({ "content": "test message automaticaly updated by module" })
+
+                        //Get actor and token from message.speaker.actor / message.speaker.token
+                        //Update actor / token with COE effect
+
+
+
+
+
+
+                    }
+
+                    //Effects (with mindshift trait) => can choose not to do anything
+
+
+                }
+            });
+        });
+    }
+}
+
+
 // `<div class="pf2e chat-card item-card"\n    \n    
 // data-spell-lvl="1"\n    
 // data-cast-level="1"\n    
@@ -72,15 +113,3 @@ export class OscillatingWave {
 // <span>Targets: 1 creature</span>\n            
 // <span>Cast Time: 2</span>\n    
 // </footer>\n</div>`
-
-
-
-          //Effects (with mindshift trait) => can choose not to do anything
-
-
-        }
-      });
-    });
-  }
-}
-
