@@ -20,6 +20,7 @@ export class OscillatingWave {
                     updateActor(actor, CONTEXT_INIT);
                 }
             });
+            console.log('nfe-oscillating-wave-module Actors initialisation finished')
 
             Hooks.on("renderChatMessage", (message, html) => {
 
