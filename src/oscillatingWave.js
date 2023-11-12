@@ -2,7 +2,7 @@ import { updateActor } from "./updateActor.js";
 
 export class OscillatingWave {
 
-    async start(verbose = true) {
+    start(verbose = true) {
         Hooks.on("ready", () => {
             if (verbose) {
                 fetch('./modules/nfe_oscillating_wave_module/module.json')
@@ -13,7 +13,7 @@ export class OscillatingWave {
 
             //init actor
             game.actors.forEach(actor => {
-                if (actor.items.filter(item => item.name === 'The Oscillating Wave')) {
+                if (actor.items.filter(item => item.name === 'The Oscillating Wave').length > 0) {
                     console.log('nfe-oscillating-wave-module found an oscillating wave psychic');
                     updateActor(actor, 'init');
                 }
