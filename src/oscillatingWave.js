@@ -1,6 +1,6 @@
 import { updateActor } from "./updateActor.js";
 import { createChatCardButton } from "./utils/chatCard.js";
-import { CONTEXT_CAST_COLD, CONTEXT_CAST_FIRE, CONTEXT_INIT } from "./utils/constants.js";
+import { COE_COLD_EFFECT_UUID, COE_FIRE_EFFECT_UUID, CONTEXT_CAST_COLD, CONTEXT_CAST_FIRE, CONTEXT_INIT } from "./utils/constants.js";
 
 export class OscillatingWave {
 
@@ -34,9 +34,6 @@ export class OscillatingWave {
                         //FIXME no context on cantrips message.flags?.pf2e?.context?.type === 'spell-cast' && 
                         if (message.content.includes('Conservation of Energy')) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
                             console.log('nfe-oscillating-wave-module intercepted a spell with the conservation of energy trait');
-
-                            const COE_FIRE_EFFECT_UUID = 'Compendium.world.ow-effects.Item.JBlR5VyoWad5fMVQ'; //FIRE
-                            const COE_COLD_EFFECT_UUID = 'Compendium.world.ow-effects.Item.XjNDVHeHaj3cBOml'; //COLD
 
                             const existingFireState = message.actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_FIRE_EFFECT_UUID);
                             const existingColdState = message.actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_COLD_EFFECT_UUID);

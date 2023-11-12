@@ -1,11 +1,7 @@
-import { CONTEXT_INIT, CONTEXT_REFOCUS, CONTEXT_CAST_FIRE, CONTEXT_CAST_COLD } from "./utils/constants.js";
+import { CONTEXT_INIT, CONTEXT_REFOCUS, CONTEXT_CAST_FIRE, CONTEXT_CAST_COLD, COE_STABLE_EFFECT_UUID, COE_FIRE_EFFECT_UUID, COE_COLD_EFFECT_UUID } from "./utils/constants.js";
 
 //Updates the actor with the correct effect from compendium
 async function updateActor(actor, context) {
-    //FIXME check if uuid is constant between worlds
-    const COE_STABLE_EFFECT_UUID = 'Compendium.nfe-test-compendium.ow-effects.Item.G7sCRiA5PSySndtM'; // Effect: STABLE
-    const COE_FIRE_EFFECT_UUID = 'Compendium.nfe-test-compendium.ow-effects.Item.vi7D3y9gCWBqiTqh'; //FIRE
-    const COE_COLD_EFFECT_UUID = 'Compendium.nfe-test-compendium.ow-effects.Item.piH42dmNYnBoYx2j'; //COLD
 
     const existingStableState = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_STABLE_EFFECT_UUID);
     const existingFireState = actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_FIRE_EFFECT_UUID);
