@@ -1,4 +1,5 @@
 import { updateActor } from "./updateActor.js";
+import { CONTEXT_CAST_COLD, CONTEXT_INIT } from "./utils/constants.js";
 
 export class OscillatingWave {
 
@@ -11,37 +12,15 @@ export class OscillatingWave {
                     .catch(e => console.log(`Starting module : OscillatingWave (error retrieving version number)`));
             }
 
-            //init actor
+            //init actors
             game.actors.forEach(actor => {
-                if (actor.items.filter(item => item.name === 'The Oscillating Wave').length > 0) {
+                if (actor.items.filter(item => item.name === 'The Oscillating Wave').length > 0) { //FIXME find a better way than using name
                     console.log('nfe-oscillating-wave-module found an oscillating wave psychic');
-                    updateActor(actor, 'init');
+                    updateActor(actor, CONTEXT_INIT);
                 }
             });
 
-
-
-            // Hooks.on(
-            //     "renderChatMessage",
-            //     async (message, html) => {
-            //         if (canvas.initialized) {
-            //             const speaker = await fromUuid(`Actor.${message.speaker.actor}`);
-            //             if (
-            //                 (message.flags?.pf2e?.context?.type === "attack-roll" ||
-            //                     message.flags?.pf2e?.context?.type === "spell-attack-roll" ||
-            //                     message.flags?.pf2e?.context?.type === "saving-throw") &&
-            //                 speaker.isOwner
-            //             ) {
-            //                 updateWeaknessType(message, speaker);
-            //                 handleEsotericWarden(message);
-            //             }
-            //         }
-
-            //         createChatCardButton(message, html);
-            //     },
-            //     { once: false }
-            // );
-            Hooks.on("createChatMessage", (message, options, messageId) => {
+            Hooks.on("renderChatMessage", (message, html) => {
 
                 //Filter messages sent by you
                 if (message.user === game.user) {
@@ -50,16 +29,28 @@ export class OscillatingWave {
                     //Spells
                     if (message.content.includes("hb_conservation-of-energy")) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
                         console.log('nfe-oscillating-wave-module intercepted a spell with the conservation of energy trait');
-                        let actualMessage = game.messages.get(message.id);
+                        //let actualMessage = game.messages.get(message.id);
                         //actualMessage.update({ "content": "test message automaticaly updated by module" })
 
-                        //Get actor and token from message.speaker.actor / message.speaker.token
-                        //Update actor / token with COE effect
 
+                        //Handle first choice
+                        const COE_FIRE_EFFECT_UUID = 'Compendium.world.ow-effects.Item.JBlR5VyoWad5fMVQ'; //FIRE
+                        const COE_COLD_EFFECT_UUID = 'Compendium.world.ow-effects.Item.XjNDVHeHaj3cBOml'; //COLD
 
+                        const existingFireState = message.actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_FIRE_EFFECT_UUID);
+                        const existingColdState = message.actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_COLD_EFFECT_UUID);
 
+                        if (!existingFireState && !existingColdState) {
+                            createChatCardButton(message, html);
+                        }
 
+                        else if (existingFireState) {
+                            updateActor(message.actor, CONTEXT_CAST_COLD);
+                        }
 
+                        else {
+                            updateActor(message.actor, CONTEXT_CAST_FIRE);
+                        }
 
                     }
 
@@ -71,6 +62,26 @@ export class OscillatingWave {
         });
     }
 }
+
+// Hooks.on(
+//     "renderChatMessage",
+//     async (message, html) => {
+//         if (canvas.initialized) {
+//             const speaker = await fromUuid(`Actor.${message.speaker.actor}`);
+//             if (
+//                 (message.flags?.pf2e?.context?.type === "attack-roll" ||
+//                     message.flags?.pf2e?.context?.type === "spell-attack-roll" ||
+//                     message.flags?.pf2e?.context?.type === "saving-throw") &&
+//                 speaker.isOwner
+//             ) {
+//                 updateWeaknessType(message, speaker);
+//                 handleEsotericWarden(message);
+//             }
+//         }
+//         createChatCardButton(message, html);
+//     },
+//     { once: false }
+// );
 
 
 // `<div class="pf2e chat-card item-card"\n    \n    
