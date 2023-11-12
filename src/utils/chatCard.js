@@ -17,7 +17,7 @@ async function createChatCardButton(message, html) {
                 </button>`
             ).on({
                 click: () => {
-                    updateActor(actor, CONTEXT_CAST_FIRE);
+                    updateActor(speaker, CONTEXT_CAST_FIRE);
                 },
             })
         );
@@ -28,7 +28,7 @@ async function createChatCardButton(message, html) {
                 </button>`
             ).on({
                 click: () => {
-                    updateActor(actor), CONTEXT_CAST_COLD;
+                    updateActor(speaker, CONTEXT_CAST_COLD);
                 },
             })
         );
