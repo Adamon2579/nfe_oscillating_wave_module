@@ -1,4 +1,5 @@
 import { updateActor } from "./updateActor.js";
+import { createChatCardButton } from "./utils/chatCard.js";
 import { CONTEXT_CAST_COLD, CONTEXT_INIT } from "./utils/constants.js";
 
 export class OscillatingWave {

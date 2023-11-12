@@ -16,12 +16,14 @@ async function updateActor(actor, context) {
     const coeColdEffect = await fromUuid(COE_COLD_EFFECT_UUID);
 
     if (context === CONTEXT_INIT && !existingStableState && !existingFireState && !existingColdState) {
+        console.log('nfe-oscillating-wave-module Init actor effect');
         const source = coeStableEffect.toObject();
         source.flags = mergeObject(source.flags ?? {}, { core: { sourceId: COE_STABLE_EFFECT_UUID } });
         await actor.createEmbeddedDocuments("Item", [source]);
     }
 
     if (context === CONTEXT_REFOCUS) {
+        console.log('nfe-oscillating-wave-module Actor refocus');
         if (existingFireState) {
             await existingFireState.delete();
         }
@@ -36,6 +38,7 @@ async function updateActor(actor, context) {
     }
 
     if (context = CONTEXT_CAST_FIRE) {
+        console.log('nfe-oscillating-wave-module Actor cast fire');
         if (existingStableState) {
             await existingStableState.delete();
         }
@@ -50,6 +53,7 @@ async function updateActor(actor, context) {
     }
 
     if (context = CONTEXT_CAST_COLD) {
+        console.log('nfe-oscillating-wave-module Actor cast cold');
         if (existingStableState) {
             await existingStableState.delete();
         }
