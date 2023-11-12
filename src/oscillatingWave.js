@@ -12,7 +12,7 @@ export class OscillatingWave {
             }
 
             //init actor
-            game.actors.array.forEach(actor => {
+            game.actors.forEach(actor => {
                 if (actor.items.filter(item => item.name === 'The Oscillating Wave')) {
                     console.log('nfe-oscillating-wave-module found an oscillating wave psychic');
                     updateActor(actor, 'init');
