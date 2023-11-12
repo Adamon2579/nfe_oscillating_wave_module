@@ -1,4 +1,4 @@
-import { CONTEXT_INIT, CONTEXT_REFOCUS, CONTEXT_CAST_FIRE, CONTEXT_CAST_COLD } from "./utils/constants";
+import { CONTEXT_INIT, CONTEXT_REFOCUS, CONTEXT_CAST_FIRE, CONTEXT_CAST_COLD } from "./utils/constants.js";
 
 //Updates the actor with the correct effect from compendium
 async function updateActor(actor, context) {
