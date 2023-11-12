@@ -5,14 +5,14 @@ import { CONTEXT_CAST_COLD, CONTEXT_CAST_FIRE } from "./constants.js";
 async function createChatCardButton(message, html) {
     const actionOrigin = message.flags.pf2e?.origin;
 
-    if (actionOrigin?.type === "action" || actionOrigin?.type === "feat") {
+    if (actionOrigin?.type === 'spell') {
         const user = game.user;
         const speaker = message.actor;
         html = html.find(".message-content");
         const contentArea = html.find(".card-content");
         contentArea.append(
             $(
-                `<button class='nfe-ow-button' ${speaker.isOwner || user.isGM ? "" : 'style="visibility:hidden"'} title="Add energy">    
+                `<button class='nfe-ow-button' ${speaker.isOwner ? "" : 'style="visibility:hidden"'} title="Add energy">    
                     Add energy
                 </button>`
             ).on({
@@ -23,7 +23,7 @@ async function createChatCardButton(message, html) {
         );
         contentArea.append(
             $(
-                `<button class='nfe-ow-button' ${speaker.isOwner || user.isGM ? "" : 'style="visibility:hidden"'} title="Remove energy">    
+                `<button class='nfe-ow-button' ${speaker.isOwner ? "" : 'style="visibility:hidden"'} title="Remove energy">    
                     Remove energy
                 </button>`
             ).on({

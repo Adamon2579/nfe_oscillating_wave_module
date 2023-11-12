@@ -39,7 +39,7 @@ async function updateActor(actor, context) {
         return;
     }
 
-    if (context = CONTEXT_CAST_FIRE) {
+    if (context === CONTEXT_CAST_FIRE) {
         console.log('nfe-oscillating-wave-module Actor cast fire');
         if (existingStableState) {
             await existingStableState.delete();
@@ -55,7 +55,7 @@ async function updateActor(actor, context) {
         return;
     }
 
-    if (context = CONTEXT_CAST_COLD) {
+    if (context === CONTEXT_CAST_COLD) {
         console.log('nfe-oscillating-wave-module Actor cast cold');
         if (existingStableState) {
             await existingStableState.delete();

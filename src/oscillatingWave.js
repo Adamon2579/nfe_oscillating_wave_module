@@ -31,7 +31,8 @@ export class OscillatingWave {
 
                         //Filter Spell / effects affected by conservation of energy
                         //Spells
-                        if (message.flags?.pf2e?.context?.type === 'spell-cast' && message.content.includes('Conservation of Energy')) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
+                        //FIXME no context on cantrips message.flags?.pf2e?.context?.type === 'spell-cast' && 
+                        if (message.content.includes('Conservation of Energy')) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
                             console.log('nfe-oscillating-wave-module intercepted a spell with the conservation of energy trait');
 
                             const COE_FIRE_EFFECT_UUID = 'Compendium.world.ow-effects.Item.JBlR5VyoWad5fMVQ'; //FIRE
@@ -42,6 +43,7 @@ export class OscillatingWave {
 
                             //Handle first choice
                             if (!existingFireState && !existingColdState) {
+                                console.log('nfe-oscillating-wave-module should display a choice')
                                 createChatCardButton(message, html);
                             }
 
