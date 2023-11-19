@@ -5,7 +5,7 @@ import { COE_COLD_EFFECT_UUID, COE_FIRE_EFFECT_UUID, CONTEXT_CAST_COLD, CONTEXT_
 export class OscillatingWave {
 
     start(verbose = true) {
-        Hooks.on("ready", () => {
+        Hooks.on('ready', () => {
             if (verbose) {
                 fetch('./modules/nfe_oscillating_wave_module/module.json')
                     .then(response => response.json())
@@ -20,9 +20,8 @@ export class OscillatingWave {
                     updateActor(actor, CONTEXT_INIT);
                 }
             });
-            console.log('nfe-oscillating-wave-module Actors initialisation finished')
 
-            Hooks.on("renderChatMessage", (message, html) => {
+            Hooks.on('renderChatMessage', (message, html, options) => {
 
                 //Filter messages sent by you
                 if (message.user === game.user) {
@@ -31,8 +30,7 @@ export class OscillatingWave {
 
                         //Filter Spell / effects affected by conservation of energy
                         //Spells
-                        //FIXME no context on cantrips message.flags?.pf2e?.context?.type === 'spell-cast' && 
-                        if (message.content.includes('Conservation of Energy')) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
+                        if (message.flags?.pf2e?.context?.type === 'spell-cast' && (message.content.includes('Conservation of Energy') || message.content.includes('conservation-of-energy'))) {//FIXME extract this check in a specialized function where I also check if it is indeed a cast spell
                             console.log('nfe-oscillating-wave-module intercepted a spell with the conservation of energy trait');
 
                             const existingFireState = message.actor.itemTypes.effect.find((e) => e.flags.core?.sourceId === COE_FIRE_EFFECT_UUID);
